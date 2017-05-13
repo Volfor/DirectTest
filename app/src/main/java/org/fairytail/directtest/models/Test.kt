@@ -16,9 +16,11 @@ data class Test(
         val questions: List<Question>,
         val time: Long
 ) {
-    // TODO: this
-    fun getAll(): Observable<List<Test>> {
-        return Observable.just(emptyList())
+    companion object {
+        // TODO: this
+        fun getAll(): Observable<List<Test>> {
+            return Observable.just(emptyList())
+        }
     }
 }
 
