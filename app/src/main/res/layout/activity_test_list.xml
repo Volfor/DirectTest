@@ -1,0 +1,36 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="org.fairytail.directtest.screens.testlist.TestListActivityViewModel" />
+    </data>
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/list_test"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical"
+            app:layoutManager="@string/rv_layout_manager_linear"
+            tools:listitem="@layout/item_test" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_create_test"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="16dp"
+            android:clickable="true"
+            android:onClick="@{(v) -> vm.onFabCreateTestClick(v)}"
+            android:src="@drawable/plus"
+            android:tint="@color/material_color_white"
+            app:elevation="4dp" />
+    </android.support.design.widget.CoordinatorLayout>
+</layout>
