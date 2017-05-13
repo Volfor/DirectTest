@@ -2,6 +2,7 @@
     <!--RecyclerView's LayoutManagers-->
     <string name="rv_layout_manager_linear" translatable="false">android.support.v7.widget.LinearLayoutManager</string>
     <string name="rv_layout_manager_grid" translatable="false">android.support.v7.widget.GridLayoutManager</string>
+    <string name="rv_flexbox_layout_manager" translatable="false">com.google.android.flexbox.FlexboxLayoutManager</string>
 
     <string name="app_name">DirectTest</string>
     <string name="enter_your_answer">Enter your answer</string>
