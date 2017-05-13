@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import org.fairytail.directtest.base.BaseBoundActivity
 import org.fairytail.directtest.databinding.ActivityMainBinding
-import org.fairytail.directtest.screens.student.teacher_selection.SelectTeacherActivity
+import org.fairytail.directtest.screens.student.test.StudentTestActivity
 import org.fairytail.directtest.screens.teacher.testlist.TestListActivity
 
 /**
@@ -16,7 +16,7 @@ class MainActivityViewModel {
     }
 
     fun onStudentClick(v: View) {
-        SelectTeacherActivity.start(v.context)
+        StudentTestActivity.start(v.context)
     }
 }
 
