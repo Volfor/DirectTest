@@ -9,43 +9,50 @@ import org.fairytail.directtest.WifiToggleHelper
 import org.fairytail.directtest.base.BaseBoundSalutActivity
 import org.fairytail.directtest.databinding.ActivityStudentTestBinding
 import org.fairytail.directtest.models.Test
-import org.parceler.Parcels
 
 /**
  * Created by Valentine on 5/13/2017.
  */
-class StudentTestActivity : BaseBoundSalutActivity<ActivityStudentTestBinding>(R.layout.activity_student_test) {
-    override val deviceName = Prefs.studentInfo.name
 
-//    private val devices = ObservableArrayList<SalutDevice>()
+enum class State { INITIAL, SELECT_TEACHER, AWAIT_START, QUIZ, RESULT }
+
+class StudentTestActivity : BaseBoundSalutActivity<ActivityStudentTestBinding>(R.layout.activity_student_test, false) {
+    private var state: State = State.INITIAL
+
+    override val deviceName = Prefs.studentInfo.name
 
     lateinit var test: Test
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        test = Parcels.unwrap(intent.getParcelableExtra(EXTRA_TEST))
+        moveToState(State.SELECT_TEACHER)
+    }
 
-//        network.discoverNetworkServices({ device -> devices.add(device) }, true)
+    fun moveToState(state: State, intent: Intent? = null) {
+        if (this.state == state) return
 
-//        LastAdapter(devices, BR.item)
-//                .type { _, _ -> Type<ItemDeviceBinding>(R.layout.item_device)
-//                        .onClick { network.registerWithHost(it.binding.item, { toast("Registered!") }, { toast("Failed to register!") } ) }
-//                }
-//                .into(recycler)
+        supportFragmentManager.beginTransaction()
+                .replace(R.id.placeholder, when(state) {
+                    State.SELECT_TEACHER -> SelectTeacherFragment()
+                    State.AWAIT_START -> TODO()
+                    State.QUIZ -> TODO()
+                    State.RESULT -> TODO()
+                    else -> throw IllegalStateException()
+                })
+                .commit()
+        this.state = state
     }
 
     override fun onDataReceived(p0: Any?) {
-
+        TODO("not implemented")
     }
 
     companion object {
-        private val EXTRA_TEST = "EXTRA_TEST"
-
-        fun start(ctx: Context, test: Test) {
+        fun start(ctx: Context) {
             WifiToggleHelper.toggle()
                     .subscribe {
-                        ctx.startActivity(Intent(ctx, StudentTestActivity::class.java).putExtra(EXTRA_TEST, Parcels.wrap(test)))
+                        ctx.startActivity(Intent(ctx, StudentTestActivity::class.java))
                     }
         }
     }

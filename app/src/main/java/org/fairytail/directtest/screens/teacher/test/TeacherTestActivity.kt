@@ -1,10 +1,8 @@
-package org.fairytail.directtest.screens.teacher.await_students
+package org.fairytail.directtest.screens.teacher.test
 
 import android.content.Context
 import android.content.Intent
-import android.databinding.ObservableArrayList
 import android.os.Bundle
-import com.peak.salut.SalutDevice
 import org.fairytail.directtest.Prefs
 import org.fairytail.directtest.R
 import org.fairytail.directtest.WifiToggleHelper
@@ -18,8 +16,10 @@ import org.parceler.Parcels
  * GitHub: https://github.com/s0nerik
  * LinkedIn: https://linkedin.com/in/sonerik
  */
-class TeacherTestActivity : BaseBoundSalutActivity<ActivityTeacherTestBinding>(R.layout.activity_teacher_test) {
-    private val devices = ObservableArrayList<SalutDevice>()
+enum class State { INITIAL, AWAIT_STUDENTS, AWAIT_RESULTS, SHOW_RESULTS }
+
+class TeacherTestActivity : BaseBoundSalutActivity<ActivityTeacherTestBinding>(R.layout.activity_teacher_test, true) {
+    private var state: State = State.INITIAL
 
     lateinit var test: Test
 
@@ -27,16 +27,22 @@ class TeacherTestActivity : BaseBoundSalutActivity<ActivityTeacherTestBinding>(R
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         test = Parcels.unwrap(intent.getParcelableExtra(EXTRA_TEST))
+        moveToState(State.AWAIT_STUDENTS)
+    }
 
-//        network.startNetworkService { salutDevice ->
-//            devices.add(salutDevice)
-//        }
-//
-//        LastAdapter(devices, BR.item)
-//                .type { _, _ -> Type<ItemDeviceBinding>(R.layout.item_device) }
-//                .into(recycler)
+    fun moveToState(state: State, intent: Intent? = null) {
+        if (this.state == state) return
+
+        supportFragmentManager.beginTransaction()
+                .replace(R.id.placeholder, when(state) {
+                    State.AWAIT_STUDENTS -> AwaitStudentsFragment()
+                    State.AWAIT_RESULTS -> TODO()
+                    State.SHOW_RESULTS -> TODO()
+                    else -> throw IllegalStateException()
+                })
+                .commit()
+        this.state = state
     }
 
     override fun onDataReceived(p0: Any?) {

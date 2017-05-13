@@ -15,7 +15,7 @@ import org.fairytail.directtest.databinding.ActivityTestListBinding
 import org.fairytail.directtest.databinding.ItemTestBinding
 import org.fairytail.directtest.models.RealmTest
 import org.fairytail.directtest.models.Test
-import org.fairytail.directtest.screens.teacher.await_students.AwaitStudentsActivity
+import org.fairytail.directtest.screens.teacher.test.TeacherTestActivity
 import org.jetbrains.anko.toast
 
 /**
@@ -43,9 +43,7 @@ class TestListActivity : BaseBoundActivity<ActivityTestListBinding>(R.layout.act
         LastAdapter(testList, BR.item)
                 .type { _, _ ->
                     Type<ItemTestBinding>(R.layout.item_test)
-                            .onClick {
-                                AwaitStudentsActivity.start(this, it.binding.item)
-                            }
+                            .onClick { TeacherTestActivity.start(this, it.binding.item) }
                 }
                 .into(list_test)
     }
