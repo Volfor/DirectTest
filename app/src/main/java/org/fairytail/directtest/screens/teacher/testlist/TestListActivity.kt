@@ -1,4 +1,4 @@
-package org.fairytail.directtest.screens.testlist
+package org.fairytail.directtest.screens.teacher.testlist
 
 import android.databinding.ObservableArrayList
 import android.os.Bundle
