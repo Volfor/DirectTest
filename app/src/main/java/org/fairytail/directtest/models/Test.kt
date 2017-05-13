@@ -13,6 +13,7 @@ import java.util.*
  */
 data class Test(
         val id: UUID,
+        val name: String,
         val questions: List<Question>,
         val time: Long
 ) {
