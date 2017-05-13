@@ -32,7 +32,7 @@ class TestListActivity : BaseBoundActivity<ActivityTestListBinding>(R.layout.act
 
         realm.where(RealmTest::class.java)
                 .findAllAsync()
-                .addChangeListener {
+                .addChangeListener { it ->
                     testList.clear()
                     testList.addAll(it.map { Test(it) })
                 }

@@ -1,5 +1,6 @@
 package org.fairytail.directtest
 
+import android.os.Bundle
 import android.view.View
 import org.fairytail.directtest.base.BaseBoundActivity
 import org.fairytail.directtest.databinding.ActivityMainBinding
@@ -22,5 +23,8 @@ class MainActivityViewModel {
 }
 
 class MainActivity : BaseBoundActivity<ActivityMainBinding>(R.layout.activity_main) {
-
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding.vm = MainActivityViewModel()
+    }
 }

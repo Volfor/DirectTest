@@ -18,9 +18,9 @@ data class Question(
         private val correctAnswers: List<Answer>
 ) {
     constructor(question: RealmQuestion) : this(
-            QuestionType.valueOf(question.type),
-            question.answers.map { Answer(it) },
-            question.correctAnswers.map { Answer(it) }
+            QuestionType.valueOf(question.type!!),
+            question.answers!!.map { Answer(it) },
+            question.correctAnswers!!.map { Answer(it) }
     )
 
     fun check(vararg answers: Answer): Boolean {
@@ -29,7 +29,7 @@ data class Question(
 }
 
 open class RealmQuestion(
-        val type: String,
-        val answers: RealmList<RealmAnswer>,
-        val correctAnswers: RealmList<RealmAnswer>
+        open var type: String? = null,
+        open var answers: RealmList<RealmAnswer>? = null,
+        open var correctAnswers: RealmList<RealmAnswer>? = null
 ) : RealmObject()

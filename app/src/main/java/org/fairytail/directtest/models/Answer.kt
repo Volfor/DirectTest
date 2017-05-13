@@ -10,8 +10,8 @@ import io.realm.RealmObject
 data class Answer(
         val text: String
 ) {
-    constructor(answer: RealmAnswer) : this(answer.text)
+    constructor(answer: RealmAnswer) : this(answer.text!!)
     constructor(number: Number) : this(number.toString())
 }
 
-open class RealmAnswer(val text: String) : RealmObject()
+open class RealmAnswer(open var text: String? = null) : RealmObject()
