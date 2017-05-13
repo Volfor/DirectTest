@@ -2,6 +2,8 @@ package org.fairytail.directtest.models
 
 import io.realm.RealmList
 import io.realm.RealmObject
+import org.parceler.Parcel
+import org.parceler.ParcelConstructor
 
 /**
  * Created by Alex on 5/13/2017.
@@ -12,7 +14,10 @@ enum class QuestionType {
     SINGLE_ANSWER, MULTIPLE_ANSWERS, INPUT_NUMBER, INPUT_TEXT
 }
 
-data class QuestionImage(val url: String) {
+@Parcel(Parcel.Serialization.BEAN)
+data class QuestionImage @ParcelConstructor constructor(
+        val url: String
+) {
     companion object {
         fun from(image: RealmQuestionImage?) : QuestionImage? {
             if (image != null) {
@@ -26,12 +31,13 @@ data class QuestionImage(val url: String) {
 
 open class RealmQuestionImage(open var url: String? = null) : RealmObject()
 
-data class Question(
+@Parcel(Parcel.Serialization.BEAN)
+data class Question @ParcelConstructor constructor(
         val type: QuestionType,
         val text: String,
         val image: QuestionImage?, // TODO: save pi
         val answers: List<Answer>,
-        private val correctAnswers: List<Answer>
+        val correctAnswers: List<Answer>
 ) {
     constructor(question: RealmQuestion) : this(
             QuestionType.valueOf(question.type!!),

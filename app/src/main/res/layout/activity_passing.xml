@@ -9,7 +9,7 @@
         android:layout_height="match_parent">
 
         <com.lsjwzh.widget.recyclerviewpager.RecyclerViewPager
-            android:id="@+id/question_list"
+            android:id="@+id/questionsRecycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"

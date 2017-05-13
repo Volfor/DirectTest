@@ -13,6 +13,7 @@ import org.fairytail.directtest.databinding.ActivityTestListBinding
 import org.fairytail.directtest.databinding.ItemTestBinding
 import org.fairytail.directtest.models.RealmTest
 import org.fairytail.directtest.models.Test
+import org.fairytail.directtest.screens.student.passing.PassingActivity
 import org.jetbrains.anko.toast
 
 /**
@@ -40,7 +41,10 @@ class TestListActivity : BaseBoundActivity<ActivityTestListBinding>(R.layout.act
         LastAdapter(testList, BR.item)
                 .type { _, _ ->
                     Type<ItemTestBinding>(R.layout.item_test)
-                            .onClick { toast("Clicked #${it.adapterPosition}: ${it.binding.item}") }
+                            .onClick {
+                                // TODO: remove this
+                                PassingActivity.start(this, it.binding.item)
+                            }
                 }
                 .into(list_test)
     }

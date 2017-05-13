@@ -3,6 +3,8 @@ package org.fairytail.directtest.models
 import io.realm.RealmList
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
+import org.parceler.Parcel
+import org.parceler.ParcelConstructor
 import java.util.*
 
 /**
@@ -10,7 +12,8 @@ import java.util.*
  * GitHub: https://github.com/s0nerik
  * LinkedIn: https://linkedin.com/in/sonerik
  */
-data class Test(
+@Parcel(Parcel.Serialization.BEAN)
+data class Test @ParcelConstructor constructor(
         val id: UUID,
         val name: String,
         val questions: List<Question>,

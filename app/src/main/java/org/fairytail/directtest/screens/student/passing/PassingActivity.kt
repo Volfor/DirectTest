@@ -1,17 +1,21 @@
 package org.fairytail.directtest.screens.student.passing
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.os.Parcelable
 import com.github.nitrico.lastadapter.LastAdapter
 import com.github.nitrico.lastadapter.Type
 import kotlinx.android.synthetic.main.activity_passing.*
-import kotlinx.android.synthetic.main.activity_test_list.*
 import org.fairytail.directtest.BR
 import org.fairytail.directtest.R
 import org.fairytail.directtest.base.BaseBoundActivity
 import org.fairytail.directtest.databinding.*
 import org.fairytail.directtest.models.Question
 import org.fairytail.directtest.models.QuestionType.*
+import org.fairytail.directtest.models.Test
 import org.jetbrains.anko.toast
+import org.parceler.Parcels
 
 /**
  * Created by Valentine on 5/13/2017.
@@ -36,18 +40,27 @@ class PassingActivity : BaseBoundActivity<ActivityPassingBinding>(R.layout.activ
     private val TYPE_INPUT_NUMBER = Type<QuestionNumberAnswerBinding>(R.layout.question_number_answer)
     private val TYPE_INPUT_TEXT = Type<QuestionTextAnswerBinding>(R.layout.question_text_answer)
 
-    val questionList = listOf<Question>()
+    private lateinit var test: Test
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        LastAdapter(questionList, BR.item).type { item, _ ->
+        test = Parcels.unwrap(intent.extras.getParcelable<Parcelable>(EXTRA_TEST))
+
+        LastAdapter(test.questions, BR.item).type { item, _ ->
             when ((item as Question).type) {
                 SINGLE_ANSWER -> TYPE_SINGLE_ANSWER
                 MULTIPLE_ANSWERS -> TYPE_MULTIPLE_ANSWERS
                 INPUT_NUMBER -> TYPE_INPUT_NUMBER
                 INPUT_TEXT -> TYPE_INPUT_TEXT
             }
-        }.into(question_list)
+        }.into(questionsRecycler)
+    }
+
+    companion object {
+        private val EXTRA_TEST = "EXTRA_TEST"
+        fun start(ctx: Context, test: Test) {
+            ctx.startActivity(Intent(ctx, PassingActivity::class.java).putExtra(EXTRA_TEST, Parcels.wrap(test)))
+        }
     }
 }

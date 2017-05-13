@@ -22,6 +22,7 @@
 
         <activity android:name=".screens.student.AwaitActivity" />
         <activity android:name=".screens.teacher.testlist.TestListActivity" />
+        <activity android:name=".screens.student.passing.PassingActivity" />
 
     </application>
 

@@ -31,6 +31,8 @@
                 android:layout_below="@+id/include"
                 android:layout_marginTop="16dp"
                 android:nestedScrollingEnabled="false"
+                android:orientation="vertical"
+                app:layoutManager="@string/rv_layout_manager_linear"
                 tools:listitem="@layout/item_single_answer" />
         </RelativeLayout>
     </android.support.v4.widget.NestedScrollView>
