@@ -36,7 +36,7 @@ class StudentTestActivity : BaseBoundSalutActivity<ActivityStudentTestBinding>(R
     }
 
     override fun onDataReceived(p0: Any?) {
-
+        TODO("not implemented")
     }
 
     companion object {
