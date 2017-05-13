@@ -1,5 +1,7 @@
 package org.fairytail.directtest.screens.teacher.testlist
 
+import android.content.Context
+import android.content.Intent
 import android.databinding.ObservableArrayList
 import android.os.Bundle
 import android.view.View
@@ -13,7 +15,7 @@ import org.fairytail.directtest.databinding.ActivityTestListBinding
 import org.fairytail.directtest.databinding.ItemTestBinding
 import org.fairytail.directtest.models.RealmTest
 import org.fairytail.directtest.models.Test
-import org.fairytail.directtest.screens.student.passing.PassingActivity
+import org.fairytail.directtest.screens.teacher.await_students.AwaitStudentsActivity
 import org.jetbrains.anko.toast
 
 /**
@@ -42,10 +44,15 @@ class TestListActivity : BaseBoundActivity<ActivityTestListBinding>(R.layout.act
                 .type { _, _ ->
                     Type<ItemTestBinding>(R.layout.item_test)
                             .onClick {
-                                // TODO: remove this
-                                PassingActivity.start(this, it.binding.item)
+                                AwaitStudentsActivity.start(this, it.binding.item)
                             }
                 }
                 .into(list_test)
+    }
+
+    companion object {
+        fun start(ctx: Context) {
+            ctx.startActivity(Intent(ctx, TestListActivity::class.java))
+        }
     }
 }

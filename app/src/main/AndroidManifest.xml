@@ -1,6 +1,13 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    package="org.fairytail.directtest"
+    >
 
-    package="org.fairytail.directtest">
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -20,9 +27,10 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".screens.student.AwaitActivity" />
+        <activity android:name=".screens.student.teacher_selection.SelectTeacherActivity" />
         <activity android:name=".screens.teacher.testlist.TestListActivity" />
         <activity android:name=".screens.student.passing.PassingActivity" />
+        <activity android:name=".screens.teacher.await_students.AwaitStudentsActivity" />
 
     </application>
 

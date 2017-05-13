@@ -1,10 +1,12 @@
 package org.fairytail.directtest
 
 import android.app.Application
+import android.content.Context
 import com.facebook.stetho.Stetho
 import com.uphyca.stetho_realm.RealmInspectorModulesProvider
 import io.realm.Realm
 import io.realm.RealmConfiguration
+import rx_activity_result2.RxActivityResult
 
 /**
  * Created by Alex on 5/13/2017.
@@ -12,8 +14,19 @@ import io.realm.RealmConfiguration
  * LinkedIn: https://linkedin.com/in/sonerik
  */
 open class App : Application() {
+    companion object {
+        private lateinit var context: Context
+
+        val ctx: Context
+            get() = context
+    }
+
     override fun onCreate() {
         super.onCreate()
+        context = this
+
+        RxActivityResult.register(this)
+
         Realm.init(this)
         Realm.setDefaultConfiguration(
                 RealmConfiguration.Builder()
