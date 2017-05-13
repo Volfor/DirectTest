@@ -52,7 +52,7 @@ abstract class BaseBoundActivity<out T : ViewDataBinding>(
     }
 }
 
-abstract class BaseBoundSalutActivity<out T : ViewDataBinding>(layoutId: Int, disableTransitions: Boolean = true
+abstract class BaseBoundSalutActivity<out T : ViewDataBinding>(layoutId: Int, val host: Boolean, disableTransitions: Boolean = true
 ) : BaseBoundActivity<T>(layoutId, disableTransitions), SalutDataCallback {
     lateinit var network: Salut
 
@@ -61,6 +61,12 @@ abstract class BaseBoundSalutActivity<out T : ViewDataBinding>(layoutId: Int, di
         network = Salut(SalutDataReceiver(this, this), SalutServiceData("test_direct", 1337, deviceName)) {
             toast("Sorry, but this device does not support WiFi Direct.")
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if (host) network.stopNetworkService(false)
+        else network.unregisterClient(false)
     }
 
     protected abstract val deviceName: String

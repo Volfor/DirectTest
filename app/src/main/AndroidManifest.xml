@@ -27,10 +27,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".screens.student.test.StudentTestActivity" />
         <activity android:name=".screens.teacher.testlist.TestListActivity" />
-        <activity android:name=".screens.student.passing.PassingActivity" />
-        <activity android:name=".screens.teacher.await_students.AwaitStudentsActivity" />
+        <activity android:name=".screens.student.test.StudentTestActivity" />
+        <activity android:name=".screens.teacher.test.TeacherTestActivity" />
 
     </application>
 

@@ -10,10 +10,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
-        <FrameLayout
-            android:id="@+id/placeholder"
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layoutManager="@string/rv_layout_manager_linear"
+            tools:listitem="@layout/item_device"
             />
     </RelativeLayout>
 </layout>

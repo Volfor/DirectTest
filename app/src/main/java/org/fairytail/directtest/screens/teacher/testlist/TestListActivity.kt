@@ -15,7 +15,7 @@ import org.fairytail.directtest.databinding.ActivityTestListBinding
 import org.fairytail.directtest.databinding.ItemTestBinding
 import org.fairytail.directtest.models.RealmTest
 import org.fairytail.directtest.models.Test
-import org.fairytail.directtest.screens.teacher.await_students.TeacherTestActivity
+import org.fairytail.directtest.screens.teacher.test.TeacherTestActivity
 import org.jetbrains.anko.toast
 
 /**

@@ -1,10 +1,10 @@
-package org.fairytail.directtest.screens.student.passing
+package org.fairytail.directtest.screens.student.test
 
 import android.os.Bundle
 import android.view.View
 import com.github.nitrico.lastadapter.LastAdapter
 import com.github.nitrico.lastadapter.Type
-import kotlinx.android.synthetic.main.activity_passing.*
+import kotlinx.android.synthetic.main.fragment_passing.*
 import org.fairytail.directtest.BR
 import org.fairytail.directtest.R
 import org.fairytail.directtest.databinding.*
