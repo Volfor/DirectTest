@@ -18,5 +18,7 @@ class App : Application() {
                         .deleteRealmIfMigrationNeeded()
                         .build()
         )
+
+        if (BuildConfig.DEBUG) FakeDataProvider.provideFakeTests()
     }
 }

@@ -16,7 +16,3 @@ object Db {
         return UUID.randomUUID().toString()
     }
 }
-
-fun <E : RealmModel> Realm.createObject(clazz: KClass<E>): E {
-    return createObject(clazz.java, Db.randomUuidString())
-}
