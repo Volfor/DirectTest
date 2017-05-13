@@ -6,7 +6,7 @@
 
         <variable
             name="vm"
-            type="org.fairytail.directtest.screens.testlist.TestListActivityViewModel" />
+            type="org.fairytail.directtest.screens.teacher.testlist.TestListActivityViewModel" />
     </data>
 
     <android.support.design.widget.CoordinatorLayout
