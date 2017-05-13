@@ -1,0 +1,24 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data></data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.lsjwzh.widget.recyclerviewpager.RecyclerViewPager
+            android:id="@+id/questionsRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            app:layoutManager="@string/rv_layout_manager_linear"
+            app:rvp_singlePageFling="true"
+            app:rvp_triggerOffset="0.1"
+            tools:listitem="@layout/question_single_answer" />
+    </RelativeLayout>
+</layout>
