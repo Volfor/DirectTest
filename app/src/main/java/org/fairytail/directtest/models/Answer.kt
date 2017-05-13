@@ -1,5 +1,6 @@
 package org.fairytail.directtest.models
 
+import android.databinding.ObservableBoolean
 import io.realm.RealmObject
 import org.parceler.Parcel
 import org.parceler.ParcelConstructor
@@ -12,10 +13,12 @@ import org.parceler.ParcelConstructor
 @Parcel(Parcel.Serialization.BEAN)
 data class Answer @ParcelConstructor constructor(
         val text: String,
-        val checked: Boolean = false
+        var checked: Boolean = false
 ) {
     constructor(answer: RealmAnswer) : this(answer.text!!, answer.checked!!)
     constructor(number: Number) : this(number.toString())
+
+    val observableState = ObservableBoolean(checked)
 }
 
 open class RealmAnswer(

@@ -22,18 +22,33 @@ import org.parceler.Parcels
  */
 class PassingActivity : BaseBoundActivity<ActivityPassingBinding>(R.layout.activity_passing) {
     private val TYPE_SINGLE_ANSWER = Type<QuestionSingleAnswerBinding>(R.layout.question_single_answer).onBind {
-        LastAdapter(it.binding.item.answers, BR.item)
+        val question = it.binding.item
+
+        LastAdapter(question.answers, BR.item)
                 .type { _, _ ->
                     Type<ItemSingleAnswerBinding>(R.layout.item_single_answer)
-                            .onClick { toast("Clicked #${it.adapterPosition}: ${it.binding.item}") }
+                            .onClick {
+                                it.binding.radioButton.setOnCheckedChangeListener { _, _ -> }
+                                question.answers.forEach { it.checked = false; it.observableState.set(false) }
+
+                                it.binding.item.checked = true
+                                it.binding.item.observableState.set(true)
+                                toast("Clicked #${it.adapterPosition}: ${it.binding.item}")
+                            }
                 }
                 .into(it.binding.recycler)
     }
     private val TYPE_MULTIPLE_ANSWERS = Type<QuestionMultipleAsnwersBinding>(R.layout.question_multiple_asnwers).onBind {
-        LastAdapter(it.binding.item.answers, BR.item)
+        val question = it.binding.item
+
+        LastAdapter(question.answers, BR.item)
                 .type { _, _ ->
                     Type<ItemMultipleAnswersBinding>(R.layout.item_multiple_answers)
-                            .onClick { toast("Clicked #${it.adapterPosition}: ${it.binding.item}") }
+                            .onClick {
+                                it.binding.item.checked = !it.binding.item.checked
+                                it.binding.item.observableState.set(it.binding.item.checked)
+                                toast("Clicked #${it.adapterPosition}: ${it.binding.item}")
+                            }
                 }
                 .into(it.binding.recycler)
     }
