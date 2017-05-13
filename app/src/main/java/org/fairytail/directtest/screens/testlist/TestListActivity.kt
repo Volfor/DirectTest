@@ -11,6 +11,7 @@ import org.fairytail.directtest.R
 import org.fairytail.directtest.base.BaseBoundActivity
 import org.fairytail.directtest.databinding.ActivityTestListBinding
 import org.fairytail.directtest.databinding.ItemTestBinding
+import org.fairytail.directtest.models.RealmTest
 import org.fairytail.directtest.models.Test
 import org.jetbrains.anko.toast
 
@@ -29,10 +30,11 @@ class TestListActivity : BaseBoundActivity<ActivityTestListBinding>(R.layout.act
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        Test.getAll()
-                .subscribe {
+        realm.where(RealmTest::class.java)
+                .findAllAsync()
+                .addChangeListener {
                     testList.clear()
-                    testList.addAll(it)
+                    testList.addAll(it.map { Test(it) })
                 }
 
         LastAdapter(testList, BR.item)

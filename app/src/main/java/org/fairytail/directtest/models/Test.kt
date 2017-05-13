@@ -1,6 +1,6 @@
 package org.fairytail.directtest.models
 
-import io.reactivex.Observable
+import io.realm.RealmList
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
 import org.fairytail.directtest.Db
@@ -17,16 +17,17 @@ data class Test(
         val questions: List<Question>,
         val time: Long
 ) {
-    companion object {
-        // TODO: this
-        fun getAll(): Observable<List<Test>> {
-            return Observable.just(emptyList())
-        }
-    }
+    constructor(test: RealmTest) : this(
+            UUID.fromString(test.id),
+            test.name,
+            test.questions.map { Question(it) },
+            test.time
+    )
 }
 
 open class RealmTest(
         @PrimaryKey open var id: String = Db.randomUuidString(),
-        val questions: List<Question>,
+        val name: String,
+        val questions: RealmList<RealmQuestion>,
         val time: Long
 ) : RealmObject()
