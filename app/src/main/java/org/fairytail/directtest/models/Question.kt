@@ -15,7 +15,7 @@ enum class QuestionType {
 data class Question(
         val type: QuestionType,
         val answers: List<Answer>,
-        val correctAnswers: List<Answer>
+        private val correctAnswers: List<Answer>
 ) {
     constructor(question: RealmQuestion) : this(
             QuestionType.valueOf(question.type),
