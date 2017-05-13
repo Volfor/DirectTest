@@ -4,4 +4,6 @@
     <string name="rv_layout_manager_grid" translatable="false">android.support.v7.widget.GridLayoutManager</string>
 
     <string name="app_name">DirectTest</string>
+    <string name="enter_your_answer">Enter your answer</string>
+
 </resources>
