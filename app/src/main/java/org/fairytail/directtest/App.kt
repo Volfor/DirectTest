@@ -1,6 +1,8 @@
 package org.fairytail.directtest
 
 import android.app.Application
+import com.facebook.stetho.Stetho
+import com.uphyca.stetho_realm.RealmInspectorModulesProvider
 import io.realm.Realm
 import io.realm.RealmConfiguration
 
@@ -9,7 +11,7 @@ import io.realm.RealmConfiguration
  * GitHub: https://github.com/s0nerik
  * LinkedIn: https://linkedin.com/in/sonerik
  */
-class App : Application() {
+open class App : Application() {
     override fun onCreate() {
         super.onCreate()
         Realm.init(this)
@@ -18,7 +20,22 @@ class App : Application() {
                         .deleteRealmIfMigrationNeeded()
                         .build()
         )
+    }
+}
 
-        if (BuildConfig.DEBUG) FakeDataProvider.provideFakeTests()
+class DebugApp : App() {
+    override fun onCreate() {
+        super.onCreate()
+        initStetho()
+        FakeDataProvider.provideFakeTests()
+    }
+
+    private fun initStetho() {
+        Stetho.initialize(
+                Stetho.newInitializerBuilder(this)
+                        .enableDumpapp(Stetho.defaultDumperPluginsProvider(this))
+                        .enableWebKitInspector(RealmInspectorModulesProvider.builder(this).build())
+                        .build()
+        )
     }
 }

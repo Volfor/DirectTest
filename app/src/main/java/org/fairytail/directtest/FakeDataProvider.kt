@@ -27,6 +27,7 @@ object FakeDataProvider {
                         question.typeEnum = QuestionType.values()[Random().nextInt(QuestionType.values().size)]
                         question.text = "Test question $it"
                         createAnswers(realm, question)
+                        test.questions!!.add(question)
                     }
                 }
             }
@@ -38,6 +39,7 @@ object FakeDataProvider {
             QuestionType.SINGLE_ANSWER -> {
                 val answer = realm.createObject(RealmAnswer::class.java)
                 answer.text = "Correct"
+                answer.checked = false
                 mutableListOf(answer)
             }
             QuestionType.MULTIPLE_ANSWERS -> {
@@ -45,6 +47,7 @@ object FakeDataProvider {
                 (2..Random().nextInt(4)).forEach {
                     val answer = realm.createObject(RealmAnswer::class.java)
                     answer.text = "Correct"
+                    answer.checked = false
                     answers += answer
                 }
                 answers
@@ -52,11 +55,13 @@ object FakeDataProvider {
             QuestionType.INPUT_NUMBER -> {
                 val answer = realm.createObject(RealmAnswer::class.java)
                 answer.text = "0"
+                answer.checked = false
                 mutableListOf(answer)
             }
             QuestionType.INPUT_TEXT -> {
                 val answer = realm.createObject(RealmAnswer::class.java)
                 answer.text = "Correct"
+                answer.checked = false
                 mutableListOf(answer)
             }
         }
@@ -66,6 +71,7 @@ object FakeDataProvider {
                 (2..Random().nextInt(5)).forEach {
                     val answer = realm.createObject(RealmAnswer::class.java)
                     answer.text = "Incorrect"
+                    answer.checked = false
                     answers += answer
                 }
                 answers
@@ -75,6 +81,7 @@ object FakeDataProvider {
                 (2..Random().nextInt(4)).forEach {
                     val answer = realm.createObject(RealmAnswer::class.java)
                     answer.text = "Incorrect"
+                    answer.checked = false
                     answers += answer
                 }
                 answers

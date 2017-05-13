@@ -8,10 +8,14 @@ import io.realm.RealmObject
  * LinkedIn: https://linkedin.com/in/sonerik
  */
 data class Answer(
-        val text: String
+        val text: String,
+        val checked: Boolean = false
 ) {
-    constructor(answer: RealmAnswer) : this(answer.text!!)
+    constructor(answer: RealmAnswer) : this(answer.text!!, answer.checked!!)
     constructor(number: Number) : this(number.toString())
 }
 
-open class RealmAnswer(open var text: String? = null) : RealmObject()
+open class RealmAnswer(
+        open var text: String? = null,
+        open var checked: Boolean? = null
+) : RealmObject()
