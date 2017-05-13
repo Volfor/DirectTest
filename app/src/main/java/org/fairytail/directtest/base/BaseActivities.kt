@@ -3,12 +3,13 @@ package org.fairytail.directtest.base
 import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
 import android.os.Bundle
-import com.peak.salut.Callbacks.SalutDataCallback
+import com.bluelinelabs.logansquare.LoganSquare
 import com.peak.salut.Salut
 import com.peak.salut.SalutDataReceiver
 import com.peak.salut.SalutServiceData
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
 import io.realm.Realm
+import org.fairytail.directtest.models.Message
 import org.jetbrains.anko.toast
 
 /**
@@ -53,14 +54,17 @@ abstract class BaseBoundActivity<out T : ViewDataBinding>(
 }
 
 abstract class BaseBoundSalutActivity<out T : ViewDataBinding>(layoutId: Int, val host: Boolean, disableTransitions: Boolean = true
-) : BaseBoundActivity<T>(layoutId, disableTransitions), SalutDataCallback {
+) : BaseBoundActivity<T>(layoutId, disableTransitions) {
+    protected abstract val deviceName: String
+
     lateinit var network: Salut
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        network = Salut(SalutDataReceiver(this, this), SalutServiceData("test_direct", 1337, deviceName)) {
-            toast("Sorry, but this device does not support WiFi Direct.")
-        }
+        network = Salut(
+                SalutDataReceiver(this, { onMessageReceived(LoganSquare.parse(it as String, Message::class.java)) }),
+                SalutServiceData("test_direct", 1337, deviceName)
+        ) { toast("Sorry, but this device does not support WiFi Direct.") }
     }
 
     override fun onDestroy() {
@@ -69,5 +73,5 @@ abstract class BaseBoundSalutActivity<out T : ViewDataBinding>(layoutId: Int, va
         else network.unregisterClient(false)
     }
 
-    protected abstract val deviceName: String
+    abstract fun onMessageReceived(msg: Message)
 }

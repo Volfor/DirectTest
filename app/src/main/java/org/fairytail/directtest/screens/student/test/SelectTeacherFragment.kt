@@ -3,6 +3,8 @@ package org.fairytail.directtest.screens.student.test
 import android.databinding.ObservableArrayList
 import android.os.Bundle
 import android.view.View
+import com.github.ajalt.timberkt.e
+import com.github.ajalt.timberkt.i
 import com.github.nitrico.lastadapter.LastAdapter
 import com.github.nitrico.lastadapter.Type
 import com.peak.salut.SalutDevice
@@ -12,7 +14,6 @@ import org.fairytail.directtest.R
 import org.fairytail.directtest.databinding.FragmentSelectTeacherBinding
 import org.fairytail.directtest.databinding.ItemDeviceBinding
 import org.fairytail.directtest.screens.student.BaseBoundStudentTestFragment
-import org.jetbrains.anko.support.v4.toast
 
 /**
  * Created by Alex on 5/13/2017.
@@ -31,7 +32,17 @@ class SelectTeacherFragment : BaseBoundStudentTestFragment<FragmentSelectTeacher
         super.onViewCreated(view, savedInstanceState)
         LastAdapter(devices, BR.item)
                 .type { _, _ -> Type<ItemDeviceBinding>(R.layout.item_device)
-                        .onClick { network.registerWithHost(it.binding.item, { toast("Registered!") }, { toast("Failed to register!") } ) }
+                        .onClick {
+                            network.registerWithHost(it.binding.item,
+                                                     {
+                                                         activity.moveToState(State.AWAIT_START)
+                                                         i { "Failed to register!" }
+                                                     },
+                                                     {
+                                                         e { "Failed to register!" }
+                                                     }
+                            )
+                        }
                 }
                 .into(recycler)
     }

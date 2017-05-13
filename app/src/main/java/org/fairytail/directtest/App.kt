@@ -2,11 +2,15 @@ package org.fairytail.directtest
 
 import android.app.Application
 import android.content.Context
+import com.bluelinelabs.logansquare.LoganSquare
+import com.bluelinelabs.logansquare.typeconverters.EnumValueTypeConverter
 import com.facebook.stetho.Stetho
 import com.uphyca.stetho_realm.RealmInspectorModulesProvider
 import io.realm.Realm
 import io.realm.RealmConfiguration
+import org.fairytail.directtest.models.MessageType
 import rx_activity_result2.RxActivityResult
+
 
 /**
  * Created by Alex on 5/13/2017.
@@ -33,6 +37,12 @@ open class App : Application() {
                         .deleteRealmIfMigrationNeeded()
                         .build()
         )
+
+        initLoganSquareTypes()
+    }
+
+    private fun initLoganSquareTypes() {
+        LoganSquare.registerTypeConverter(MessageType::class.java, EnumValueTypeConverter(MessageType::class.java))
     }
 }
 

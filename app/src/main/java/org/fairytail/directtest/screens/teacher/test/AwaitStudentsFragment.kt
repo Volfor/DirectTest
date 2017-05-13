@@ -18,8 +18,18 @@ import org.fairytail.directtest.screens.teacher.BaseBoundTeacherTestFragment
  * GitHub: https://github.com/s0nerik
  * LinkedIn: https://linkedin.com/in/sonerik
  */
+class AwaitStudentsViewModel {
+    lateinit var f: AwaitStudentsFragment
+
+    fun onStartTestClicked() {
+        f.activity.moveToState(State.AWAIT_RESULTS)
+    }
+}
+
 class AwaitStudentsFragment : BaseBoundTeacherTestFragment<FragmentAwaitStudentsBinding>(R.layout.fragment_await_students) {
     private val devices = ObservableArrayList<SalutDevice>()
+
+    val vm = AwaitStudentsViewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +39,9 @@ class AwaitStudentsFragment : BaseBoundTeacherTestFragment<FragmentAwaitStudents
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.vm = vm
+        vm.f = this
+
         LastAdapter(devices, BR.item)
                 .type { _, _ -> Type<ItemDeviceBinding>(R.layout.item_device) }
                 .into(recycler)

@@ -55,7 +55,7 @@ class PassingFragment : BaseBoundStudentTestFragment<FragmentPassingBinding>(R.l
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        LastAdapter(activity.test.questions, BR.item).type { item, _ ->
+        LastAdapter(test.questions, BR.item).type { item, _ ->
             when ((item as Question).type) {
                 QuestionType.SINGLE_ANSWER -> TYPE_SINGLE_ANSWER
                 QuestionType.MULTIPLE_ANSWERS -> TYPE_MULTIPLE_ANSWERS

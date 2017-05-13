@@ -3,12 +3,16 @@ package org.fairytail.directtest.screens.teacher.test
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import com.google.gson.Gson
 import org.fairytail.directtest.Prefs
 import org.fairytail.directtest.R
 import org.fairytail.directtest.WifiToggleHelper
 import org.fairytail.directtest.base.BaseBoundSalutActivity
 import org.fairytail.directtest.databinding.ActivityTeacherTestBinding
+import org.fairytail.directtest.models.Message
+import org.fairytail.directtest.models.MessageType
 import org.fairytail.directtest.models.Test
+import org.jetbrains.anko.toast
 import org.parceler.Parcels
 
 /**
@@ -37,7 +41,11 @@ class TeacherTestActivity : BaseBoundSalutActivity<ActivityTeacherTestBinding>(R
         supportFragmentManager.beginTransaction()
                 .replace(R.id.placeholder, when(state) {
                     State.AWAIT_STUDENTS -> AwaitStudentsFragment()
-                    State.AWAIT_RESULTS -> TODO()
+                    State.AWAIT_RESULTS -> {
+                        val msg = Message(MessageType.START_TEST, Gson().toJson(test))
+                        network.sendToAllDevices(msg, { runOnUiThread { toast("Error sending message!") } })
+                        AwaitResultsFragment()
+                    }
                     State.SHOW_RESULTS -> TODO()
                     else -> throw IllegalStateException()
                 })
@@ -45,8 +53,8 @@ class TeacherTestActivity : BaseBoundSalutActivity<ActivityTeacherTestBinding>(R
         this.state = state
     }
 
-    override fun onDataReceived(p0: Any?) {
-        TODO("not implemented")
+    override fun onMessageReceived(msg: Message) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     companion object {

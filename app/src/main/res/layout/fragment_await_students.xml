@@ -5,6 +5,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
     <data>
+        <variable
+            name="vm"
+            type="org.fairytail.directtest.screens.teacher.test.AwaitStudentsViewModel"
+            />
     </data>
     <RelativeLayout
         android:layout_width="match_parent"
@@ -15,8 +19,18 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
+            android:layout_above="@+id/btnStart"
             app:layoutManager="@string/rv_layout_manager_linear"
             tools:listitem="@layout/item_device"
+            />
+        <Button
+            android:id="@+id/btnStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Start"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:onClick='@{() -> vm.onStartTestClicked()}'
             />
     </RelativeLayout>
 </layout>
