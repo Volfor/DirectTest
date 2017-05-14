@@ -16,6 +16,7 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="128dp"
+            android:visibility="gone"
             android:background="#22000000">
 
             <ImageView
