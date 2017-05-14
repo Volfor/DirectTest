@@ -25,7 +25,11 @@ class SelectTeacherFragment : BaseBoundStudentTestFragment<FragmentSelectTeacher
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        network.discoverNetworkServices({ device -> devices.add(device) }, true)
+        network.discoverNetworkServices(
+                { device ->
+                    waitingLayout.visibility = View.GONE
+                    devices.add(device)
+                }, true)
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
