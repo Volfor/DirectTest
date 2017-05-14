@@ -12,16 +12,26 @@
     </data>
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="56dp"
         android:foreground="?selectableItemBackground"
         >
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="16dp"
+            android:paddingRight="32dp"
+            android:src="@drawable/cellphone_android"
+            />
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="72dp"
+            android:gravity="center_vertical"
             android:text='@{item.readableName}'
-            android:padding="16dp"
+            android:textSize="16sp"
+            android:textColor="@color/textColorPrimary"
             tools:text="Vasya Pupkin"
-            style="@style/MaterialTypography.Regular"
+            style=""
             />
     </RelativeLayout>
 </layout>
