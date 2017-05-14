@@ -1,0 +1,113 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="org.fairytail.directtest.screens.testcreation.QuestionEditViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/questionNumber"
+            style="@style/MaterialTypography.Regular.Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Question #1" />
+
+        <FrameLayout
+            android:id="@+id/addPhoto"
+            android:layout_width="match_parent"
+            android:layout_height="128dp"
+            android:layout_below="@+id/questionNumber"
+            android:background="#22000000"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_gravity="center"
+                android:alpha=".8"
+                android:src="@drawable/ic_add_photo" />
+        </FrameLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/question"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/addPhoto"
+            android:layout_marginTop="8dp">
+
+            <android.support.design.widget.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Question text"
+                android:paddingTop="16dp"
+                android:text="@={item.questionText}" />
+        </android.support.design.widget.TextInputLayout>
+
+        <FrameLayout
+            android:id="@+id/typeSelector"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/question"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="8dp"
+                android:text="Add answers"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <include
+                android:id="@+id/include"
+                layout="@layout/answer_type_switcher"
+                android:layout_width="156dp"
+                android:layout_height="36dp"
+                android:layout_gravity="end|center_vertical" />
+        </FrameLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/answersRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/typeSelector"
+            android:nestedScrollingEnabled="false"
+            android:orientation="vertical"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:visibility="@{item.listVisibility}"
+            app:layoutManager="@string/rv_layout_manager_linear"
+            tools:listitem="@layout/item_single_answer_edit" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/answersRecycler"
+            android:layout_centerHorizontal="true"
+            android:alpha=".8"
+            android:onClick="@{() -> item.addEmptyAnswer()}"
+            android:padding="8dp"
+            android:src="@drawable/plus_circle"
+            android:tint="@color/colorAccent"
+            android:visibility="@{item.listVisibility}" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/typeSelector"
+            android:hint="Enter correct answer"
+            android:padding="16dp"
+            android:visibility="@{item.inputVisibility}"
+            tools:visibility="gone" />
+    </RelativeLayout>
+</layout>
