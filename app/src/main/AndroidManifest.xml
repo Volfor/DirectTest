@@ -18,7 +18,9 @@
 
         <activity
             android:name=".MainActivity"
-            android:label="Testie">
+            android:label="Testie"
+            android:theme="@style/AppTheme.MainActivity"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

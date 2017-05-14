@@ -5,7 +5,6 @@ import org.fairytail.directtest.models.QuestionType
 import org.fairytail.directtest.models.RealmAnswer
 import org.fairytail.directtest.models.RealmQuestion
 import org.fairytail.directtest.models.RealmTest
-import java.util.*
 import java.util.concurrent.TimeUnit
 
 /**
@@ -125,6 +124,7 @@ fun createOOPTest(realm: Realm) {
     answers1 += createIncorrectAnswer(realm, "ООП не поддерживает повторное использование компонентов")
     answers1 += createIncorrectAnswer(realm, "ООП поддерживает разработку программ \"сверху-вниз\"")
     answers1 += createIncorrectAnswer(realm, "ООП не поддерживает понятие абстракции")
+    question1.answers!!.addAll(answers1)
     test.questions!!.add(question1)
 
     val question2 = realm.createObject(RealmQuestion::class.java)
@@ -135,6 +135,7 @@ fun createOOPTest(realm: Realm) {
     answers2 += createCorrectAnswer(realm, "используется для передачи методов в качестве аргументов к другим методам")
     answers2 += createIncorrectAnswer(realm, "это модификатор уровня агрегируемого метода")
     answers2 += createIncorrectAnswer(realm, "это не явная реализация полиморфизма")
+    question2.answers!!.addAll(answers2)
     test.questions!!.add(question2)
 
     val question3 = realm.createObject(RealmQuestion::class.java)
@@ -145,6 +146,7 @@ fun createOOPTest(realm: Realm) {
     answers3 += createCorrectAnswer(realm, "Содержит один базовый класс и несколько производных классов одного и того же базового класса")
     answers3 += createIncorrectAnswer(realm, "Содержит класс, производный от производного класса")
     answers3 += createIncorrectAnswer(realm, "Содержит несколько базовых классов и производный класс")
+    question3.answers!!.addAll(answers3)
     test.questions!!.add(question3)
 
     val question4 = realm.createObject(RealmQuestion::class.java)
@@ -155,6 +157,7 @@ fun createOOPTest(realm: Realm) {
     answers4 += createCorrectAnswer(realm, "Инкапсуляция")
     answers4 += createIncorrectAnswer(realm, "Абстракция")
     answers4 += createIncorrectAnswer(realm, "Наследование")
+    question4.answers!!.addAll(answers4)
     test.questions!!.add(question4)
 
     val question5 = realm.createObject(RealmQuestion::class.java)
@@ -166,6 +169,7 @@ fun createOOPTest(realm: Realm) {
     answers5 += createCorrectAnswer(realm, "Поведенческие шаблоны")
     answers5 += createIncorrectAnswer(realm, "Стратегические шаблоны")
     answers5 += createCorrectAnswer(realm, "Структурные шаблоны")
+    question5.answers!!.addAll(answers5)
     test.questions!!.add(question5)
 
     val question6 = realm.createObject(RealmQuestion::class.java)
@@ -177,6 +181,7 @@ fun createOOPTest(realm: Realm) {
     answers6 += createIncorrectAnswer(realm, "полиморфизм реализуется только с помощью шаблонов (параметризуемых классов)")
     answers6 += createCorrectAnswer(realm, "полиморфизм - это возможность существования разных вариантов реализации одноименного действия")
     answers6 += createCorrectAnswer(realm, "клиенты полиморфных классов могут знать только об их общем интерфейсе")
+    question6.answers!!.addAll(answers6)
     test.questions!!.add(question6)
 
     val question7 = realm.createObject(RealmQuestion::class.java)
@@ -186,6 +191,7 @@ fun createOOPTest(realm: Realm) {
     answers7 += createCorrectAnswer(realm, "в любом месте, где допустимо использование объекта, принадлежащего классу-предку, точно также допустимо использование класса-наследника.")
     answers7 += createIncorrectAnswer(realm, "в любом месте, где допустимо использование объекта, принадлежащего классу-наследнику, точно также допустимо использование класса-предка.")
     answers7 += createIncorrectAnswer(realm, "в системе имеется хотя бы один \"наследник\"")
+    question7.answers!!.addAll(answers7)
     test.questions!!.add(question7)
 
     val question8 = realm.createObject(RealmQuestion::class.java)
@@ -196,6 +202,7 @@ fun createOOPTest(realm: Realm) {
     answers8 += createCorrectAnswer(realm, "...вашей комнатой и мебелью в ней")
     answers8 += createIncorrectAnswer(realm, "...вами и вашими друзьями")
     answers8 += createIncorrectAnswer(realm, "...вами и вашими руками")
+    question8.answers!!.addAll(answers8)
     test.questions!!.add(question8)
 
     val question9 = realm.createObject(RealmQuestion::class.java)
@@ -207,6 +214,7 @@ fun createOOPTest(realm: Realm) {
     answers9 += createIncorrectAnswer(realm, "Класс может иметь много экземпляров, а объект - один или ниодного")
     answers9 += createIncorrectAnswer(realm, "Класс может инстанциировать объекты, а сам объект - нет")
     answers9 += createCorrectAnswer(realm, "Объект - это экземпляр класса")
+    question9.answers!!.addAll(answers9)
     test.questions!!.add(question9)
 
     val question10 = realm.createObject(RealmQuestion::class.java)
@@ -219,6 +227,7 @@ fun createOOPTest(realm: Realm) {
     answers10 += createCorrectAnswer(realm, "Одиночка (Singleton)")
     answers10 += createCorrectAnswer(realm, "Строитель (Builder)")
     answers10 += createCorrectAnswer(realm, "Пул одиночек (Multiton)")
+    question10.answers!!.addAll(answers10)
     test.questions!!.add(question10)
 
     val question11 = realm.createObject(RealmQuestion::class.java)
@@ -231,6 +240,7 @@ fun createOOPTest(realm: Realm) {
     answers11 += createIncorrectAnswer(realm, "Статических методов")
     answers11 += createCorrectAnswer(realm, "Виртуальных методов")
     answers11 += createIncorrectAnswer(realm, "Защищённых полей")
+    question11.answers!!.addAll(answers11)
     test.questions!!.add(question11)
 
     val question12 = realm.createObject(RealmQuestion::class.java)
@@ -241,6 +251,7 @@ fun createOOPTest(realm: Realm) {
     answers12 += createIncorrectAnswer(realm, "Конструкторы могут быть виртуальными только в исключительных ситуациях")
     answers12 += createIncorrectAnswer(realm, "При использовании модификатора доступа static, конструкторы могут быть виртуальными")
     answers12 += createCorrectAnswer(realm, "Конструкторы не могут быть виртуальными")
+    question12.answers!!.addAll(answers12)
     test.questions!!.add(question12)
 
     val question13 = realm.createObject(RealmQuestion::class.java)
@@ -252,6 +263,7 @@ fun createOOPTest(realm: Realm) {
     answers13 += createCorrectAnswer(realm, "Поддержка языком ООП требует дополнительных ресурсов")
     answers13 += createIncorrectAnswer(realm, "Невозможность абстракции")
     answers13 += createCorrectAnswer(realm, "Избыточность")
+    question13.answers!!.addAll(answers13)
     test.questions!!.add(question13)
 
 }
