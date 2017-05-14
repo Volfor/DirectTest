@@ -2,23 +2,77 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data></data>
+    <data>
+        <variable
+            name="vm"
+            type="org.fairytail.directtest.screens.student.test.PassingFragmentViewModel"
+            />
+    </data>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        >
 
         <com.lsjwzh.widget.recyclerviewpager.RecyclerViewPager
             android:id="@+id/questionsRecycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_above="@+id/bottomBar"
             android:clipToPadding="false"
             android:orientation="horizontal"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
             app:layoutManager="@string/rv_layout_manager_linear"
-            app:rvp_singlePageFling="true"
-            app:rvp_triggerOffset="0.1"
-            tools:listitem="@layout/question_single_answer" />
+            tools:listitem="@layout/question_single_answer"
+            />
+
+        <RelativeLayout
+            android:id="@+id/bottomBar"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_alignParentBottom="true"
+            android:gravity="center_vertical"
+            android:background="@color/material_color_white"
+            android:elevation="4dp"
+            >
+            <Button
+                android:id="@+id/btnBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:text="@string/back"
+                android:onClick='@{() -> vm.onPrevClicked()}'
+                tools:visibility="visible"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                />
+
+            <TextView
+                android:id="@+id/tvTimer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@+id/btnBack"
+                android:layout_toLeftOf="@+id/btnNext"
+                android:gravity="center"
+                android:textColor="@color/material_color_grey_600"
+                tools:text="13:29"
+                style="@style/MaterialTypography.Regular.Title"
+                />
+
+            <Button
+                android:id="@+id/btnNext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:text="@string/next"
+                android:onClick='@{() -> vm.onNextClicked()}'
+                tools:visibility="visible"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                />
+        </RelativeLayout>
     </RelativeLayout>
 </layout>

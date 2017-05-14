@@ -5,5 +5,8 @@
 
     <string name="app_name">DirectTest</string>
     <string name="enter_your_answer">Enter your answer</string>
+    <string name="next">Next</string>
+    <string name="back">Back</string>
+    <string name="finish">Finish</string>
 
 </resources>

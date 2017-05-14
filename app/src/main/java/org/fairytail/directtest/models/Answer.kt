@@ -12,7 +12,7 @@ import org.parceler.ParcelConstructor
  */
 @Parcel(Parcel.Serialization.BEAN)
 data class Answer @ParcelConstructor constructor(
-        val text: String,
+        var text: String,
         var checked: Boolean = false
 ) {
     constructor(answer: RealmAnswer) : this(answer.text!!, answer.checked!!)

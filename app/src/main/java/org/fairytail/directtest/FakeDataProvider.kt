@@ -54,7 +54,7 @@ object FakeDataProvider {
             }
             QuestionType.INPUT_NUMBER -> {
                 val answer = realm.createObject(RealmAnswer::class.java)
-                answer.text = "0"
+                answer.text = "42"
                 answer.checked = false
                 mutableListOf(answer)
             }
@@ -86,8 +86,18 @@ object FakeDataProvider {
                 }
                 answers
             }
-            QuestionType.INPUT_NUMBER -> mutableListOf<RealmAnswer>()
-            QuestionType.INPUT_TEXT -> mutableListOf<RealmAnswer>()
+            QuestionType.INPUT_NUMBER -> {
+                val answer = realm.createObject(RealmAnswer::class.java)
+                answer.text = ""
+                answer.checked = false
+                mutableListOf(answer)
+            }
+            QuestionType.INPUT_TEXT -> {
+                val answer = realm.createObject(RealmAnswer::class.java)
+                answer.text = ""
+                answer.checked = false
+                mutableListOf(answer)
+            }
         }
 
         val allAnswers = correctAnswers + incorrectAnswers
