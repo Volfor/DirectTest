@@ -3,8 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
-
     </data>
 
     <android.support.constraint.ConstraintLayout
@@ -69,6 +67,7 @@
             android:layout_marginTop="8dp"
             android:textColor="#dd000000"
             android:textStyle="bold"
+            android:visibility="invisible"
             app:layout_constraintLeft_toLeftOf="@+id/correctAnswers"
             app:layout_constraintTop_toBottomOf="@+id/correctAnswers"
             tools:text="Time spent: 15:00" />

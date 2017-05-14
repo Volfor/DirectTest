@@ -22,6 +22,16 @@ class TestResultActivity : BaseBoundActivity<ActivityTestResultBinding>(R.layout
         super.onCreate(savedInstanceState)
         val testResult = Parcels.unwrap<TestResult>(intent.getParcelableExtra(EXTRA_TEST_RESULT))
 
+        studentName.text = testResult.student.name
+        studentInfo.text = "Student"
+
+        var count = 0
+        testResult.questionResults.forEach { if (it.correct) count++ }
+        val correctCount = count
+        val questionsCount = testResult.test.questions.size
+
+        correctAnswers.text = "Correct answers: $correctCount/$questionsCount"
+
         LastAdapter(testResult.questionResults, BR.item)
                 .type { _, position ->
                     Type<ItemQuestionResultCellBinding>(R.layout.item_question_result_cell)
