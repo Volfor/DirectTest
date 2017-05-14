@@ -1,32 +1,26 @@
 package org.fairytail.directtest.screens.student.test
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import com.github.ajalt.timberkt.e
 import com.github.nitrico.lastadapter.LastAdapter
 import com.github.nitrico.lastadapter.Type
-import com.google.gson.Gson
-import kotlinx.android.synthetic.main.fragment_results.*
+import kotlinx.android.synthetic.main.activity_test_result.*
 import org.fairytail.directtest.BR
-import org.fairytail.directtest.Prefs
 import org.fairytail.directtest.R
-import org.fairytail.directtest.databinding.FragmentResultsBinding
+import org.fairytail.directtest.base.BaseBoundActivity
+import org.fairytail.directtest.databinding.ActivityTestResultBinding
 import org.fairytail.directtest.databinding.ItemQuestionResultCellBinding
-import org.fairytail.directtest.models.Message
-import org.fairytail.directtest.models.MessageType
 import org.fairytail.directtest.models.TestResult
-import org.fairytail.directtest.screens.student.BaseBoundStudentTestFragment
+import org.parceler.Parcels
 
 /**
  * Created by Valentine on 5/13/2017.
  */
-class ResultsFragment : BaseBoundStudentTestFragment<FragmentResultsBinding>(R.layout.fragment_results) {
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        val testResult = TestResult.from(Prefs.studentInfo, activity.test)
-
-        network.sendToHost(Message(MessageType.TEST_RESULT, Gson().toJson(testResult)), { e { "Error sending test result" } })
+class TestResultActivity : BaseBoundActivity<ActivityTestResultBinding>(R.layout.activity_test_result) {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val testResult = Parcels.unwrap<TestResult>(intent.getParcelableExtra(EXTRA_TEST_RESULT))
 
         LastAdapter(testResult.questionResults, BR.item)
                 .type { _, position ->
@@ -41,13 +35,21 @@ class ResultsFragment : BaseBoundStudentTestFragment<FragmentResultsBinding>(R.l
                                     color = R.color.material_color_red_400
                                 }
 
-                                it.binding.cardView.setCardBackgroundColor(activity.getColor(color))
+                                it.binding.cardView.setCardBackgroundColor(getColor(color))
                             }
                             .onClick {
                                 TODO("start detailed results activity")
                             }
                 }
                 .into(questionsRecycler)
+    }
+
+    companion object {
+        private val EXTRA_TEST_RESULT = "EXTRA_TEST_RESULT"
+
+        fun start(ctx: Context, testResult: TestResult) {
+            ctx.startActivity(Intent(ctx, TestResultActivity::class.java).putExtra(EXTRA_TEST_RESULT, Parcels.wrap(testResult)))
+        }
     }
 
 }

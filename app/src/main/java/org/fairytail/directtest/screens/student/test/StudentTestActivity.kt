@@ -3,6 +3,8 @@ package org.fairytail.directtest.screens.student.test
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import com.github.ajalt.timberkt.e
+import com.google.gson.Gson
 import org.fairytail.directtest.Prefs
 import org.fairytail.directtest.R
 import org.fairytail.directtest.WifiToggleHelper
@@ -11,6 +13,7 @@ import org.fairytail.directtest.databinding.ActivityStudentTestBinding
 import org.fairytail.directtest.models.Message
 import org.fairytail.directtest.models.MessageType
 import org.fairytail.directtest.models.Test
+import org.fairytail.directtest.models.TestResult
 
 /**
  * Created by Valentine on 5/13/2017.
@@ -39,7 +42,13 @@ class StudentTestActivity : BaseBoundSalutActivity<ActivityStudentTestBinding>(R
                     State.SELECT_TEACHER -> SelectTeacherFragment()
                     State.AWAIT_START -> AwaitStartFragment()
                     State.QUIZ -> PassingFragment()
-                    State.RESULT -> ResultsFragment()
+                    State.RESULT -> {
+                        val testResult = TestResult.from(Prefs.studentInfo, test)
+                        network.sendToHost(Message(MessageType.TEST_RESULT, Gson().toJson(testResult)), { e { "Error sending test result" } })
+                        finish()
+                        TestResultActivity.start(this, testResult)
+                        return
+                    }
                     else -> throw IllegalStateException()
                 })
                 .commit()

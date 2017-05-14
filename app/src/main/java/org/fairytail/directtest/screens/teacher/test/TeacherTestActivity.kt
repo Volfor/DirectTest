@@ -11,7 +11,6 @@ import org.fairytail.directtest.WifiToggleHelper
 import org.fairytail.directtest.base.BaseBoundSalutActivity
 import org.fairytail.directtest.databinding.ActivityTeacherTestBinding
 import org.fairytail.directtest.models.*
-import org.fairytail.directtest.screens.teacher.TestResultsListActivity
 import org.jetbrains.anko.toast
 import org.parceler.Parcels
 

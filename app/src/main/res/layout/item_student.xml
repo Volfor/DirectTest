@@ -6,7 +6,7 @@
 
         <variable
             name="item"
-            type="org.fairytail.directtest.screens.teacher.StudentItemViewModel" />
+            type="org.fairytail.directtest.screens.teacher.test.StudentItemViewModel" />
     </data>
 
     <RelativeLayout

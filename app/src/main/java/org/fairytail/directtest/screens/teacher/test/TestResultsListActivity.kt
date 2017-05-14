@@ -1,4 +1,4 @@
-package org.fairytail.directtest.screens.teacher
+package org.fairytail.directtest.screens.teacher.test
 
 import android.content.Context
 import android.content.Intent
@@ -16,6 +16,7 @@ import org.fairytail.directtest.databinding.ItemStudentBinding
 import org.fairytail.directtest.models.Student
 import org.fairytail.directtest.models.TestResult
 import org.fairytail.directtest.models.TestResults
+import org.fairytail.directtest.screens.student.test.TestResultActivity
 import org.parceler.Parcels
 
 /**
@@ -32,9 +33,7 @@ class TestResultsListActivity : BaseBoundActivity<ActivityTestResultsListBinding
         LastAdapter(students, BR.item)
                 .type { _, _ ->
                     Type<ItemStudentBinding>(R.layout.item_student)
-                            .onClick {
-                                // TODO: open detailed results
-                            }
+                            .onClick { TestResultActivity.start(this, it.binding.item.results) }
                 }
                 .into(studentsRecycler)
     }

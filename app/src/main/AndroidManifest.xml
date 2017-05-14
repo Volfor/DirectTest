@@ -30,7 +30,8 @@
         <activity android:name=".screens.teacher.testlist.TestListActivity" />
         <activity android:name=".screens.student.test.StudentTestActivity" />
         <activity android:name=".screens.teacher.test.TeacherTestActivity" />
-        <activity android:name=".screens.teacher.TestResultsListActivity" />
+        <activity android:name=".screens.teacher.test.TestResultsListActivity" />
+        <activity android:name=".screens.student.test.TestResultActivity" />
 
     </application>
 
