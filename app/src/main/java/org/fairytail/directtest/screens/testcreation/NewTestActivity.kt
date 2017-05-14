@@ -16,12 +16,9 @@ import org.fairytail.directtest.R
 import org.fairytail.directtest.base.BaseBoundActivity
 import org.fairytail.directtest.databinding.ActivityNewTestBinding
 import org.fairytail.directtest.databinding.ItemQuestionEditBinding
-import org.fairytail.directtest.databinding.ItemSingleAnswerBinding
 import org.fairytail.directtest.models.*
 import org.jetbrains.anko.onCheckedChange
 import org.jetbrains.anko.onClick
-import org.jetbrains.anko.support.v4.toast
-import org.jetbrains.anko.toast
 
 /**
  * Created by Valentine on 5/14/2017.
@@ -41,7 +38,7 @@ class NewTestActivity : BaseBoundActivity<ActivityNewTestBinding>(R.layout.activ
         val test = realm.createObject(RealmTest::class.java, Db.randomUuidString())
 
         val timePickerDialog = TimeDurationPickerDialog(this, TimeDurationPickerDialog.OnDurationSetListener { view, duration ->
-            toast("time selected: $duration")
+//            toast("time selected: $duration")
         }, defaultTime)
 
         questionList.add(Question(QuestionType.SINGLE_ANSWER, "", null, listOf<Answer>()))

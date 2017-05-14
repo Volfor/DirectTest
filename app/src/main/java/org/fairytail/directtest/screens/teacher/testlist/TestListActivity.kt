@@ -16,14 +16,13 @@ import org.fairytail.directtest.databinding.ItemTestBinding
 import org.fairytail.directtest.models.RealmTest
 import org.fairytail.directtest.models.Test
 import org.fairytail.directtest.screens.teacher.test.TeacherTestActivity
-import org.jetbrains.anko.toast
 
 /**
  * Created by Valentine on 5/13/2017.
  */
 class TestListActivityViewModel {
     fun onFabCreateTestClick(v: View?) {
-        v?.context?.toast("fab clicked")
+//        v?.context?.toast("fab clicked")
     }
 }
 
