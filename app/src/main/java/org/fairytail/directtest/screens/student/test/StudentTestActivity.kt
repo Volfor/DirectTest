@@ -5,8 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import com.github.ajalt.timberkt.e
 import com.google.gson.Gson
-import io.reactivex.Single
-import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.Observable
 import org.fairytail.directtest.Prefs
 import org.fairytail.directtest.R
 import org.fairytail.directtest.WifiToggleHelper
@@ -40,23 +39,23 @@ class StudentTestActivity : BaseBoundSalutActivity<ActivityStudentTestBinding>(R
     fun moveToState(state: State, intent: Intent? = null) {
         if (this.state == state) return
 
+        if (state == State.RESULT) {
+            val testResult = TestResult.from(Prefs.studentInfo, test)
+            network.sendToHost(Message(MessageType.TEST_RESULT, Gson().toJson(testResult)), { e { "Error sending test result" } })
+            Observable.timer(3, TimeUnit.SECONDS)
+                    .subscribe {
+                        finish()
+                        TestResultActivity.start(this, testResult)
+                    }
+            return
+        }
+
         supportFragmentManager.beginTransaction()
                 .replace(R.id.placeholder, when(state) {
                     State.SELECT_TEACHER -> SelectTeacherFragment()
                     State.AWAIT_START -> AwaitStartFragment()
                     State.QUIZ -> PassingFragment()
-                    State.RESULT -> {
-                        val testResult = TestResult.from(Prefs.studentInfo, test)
-                        network.sendToHost(Message(MessageType.TEST_RESULT, Gson().toJson(testResult)), { e { "Error sending test result" } })
-                        Single.timer(3, TimeUnit.SECONDS)
-                                .observeOn(AndroidSchedulers.mainThread())
-                                .doOnSuccess {
-                                    finish()
-                                    TestResultActivity.start(this, testResult)
-                                }
-                        return
-                    }
-                    else -> throw IllegalStateException()
+                    else -> AwaitStartFragment()
                 })
                 .commit()
         this.state = state
