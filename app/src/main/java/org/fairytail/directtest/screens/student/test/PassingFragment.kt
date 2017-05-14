@@ -15,7 +15,6 @@ import org.fairytail.directtest.databinding.*
 import org.fairytail.directtest.models.Question
 import org.fairytail.directtest.models.QuestionType
 import org.fairytail.directtest.screens.student.BaseBoundStudentTestFragment
-import org.jetbrains.anko.support.v4.toast
 import java.util.concurrent.TimeUnit
 
 /**
@@ -52,7 +51,6 @@ class PassingFragment : BaseBoundStudentTestFragment<FragmentPassingBinding>(R.l
 
                                 it.binding.item.checked = true
                                 it.binding.item.observableState.set(true)
-                                toast("Clicked #${it.adapterPosition}: ${it.binding.item}")
                             }
                 }
                 .into(it.binding.recycler)
@@ -66,7 +64,6 @@ class PassingFragment : BaseBoundStudentTestFragment<FragmentPassingBinding>(R.l
                             .onClick {
                                 it.binding.item.checked = !it.binding.item.checked
                                 it.binding.item.observableState.set(it.binding.item.checked)
-                                toast("Clicked #${it.adapterPosition}: ${it.binding.item}")
                             }
                 }
                 .into(it.binding.recycler)

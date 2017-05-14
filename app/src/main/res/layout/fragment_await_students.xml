@@ -14,23 +14,53 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
+        <RelativeLayout
+            android:id="@+id/waitingLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/text"
+                android:layout_centerHorizontal="true"
+                />
+            <TextView
+                android:id="@+id/text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_centerInParent="true"
+                android:text="Waiting for students..."
+                android:textSize="16sp"
+                />
+        </RelativeLayout>
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:layout_above="@+id/btnStart"
+            android:layout_above="@+id/bottomBlock"
             app:layoutManager="@string/rv_layout_manager_linear"
             tools:listitem="@layout/item_device"
             />
-        <Button
-            android:id="@+id/btnStart"
-            android:layout_width="wrap_content"
+        <FrameLayout
+            android:id="@+id/bottomBlock"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Start"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:onClick='@{() -> vm.onStartTestClicked()}'
-            />
+            android:background="@color/material_color_grey_200"
+            android:elevation="4dp"
+            >
+            <Button
+                android:id="@+id/btnStart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Start"
+                android:onClick='@{() -> vm.onStartTestClicked()}'
+                style="@style/Widget.AppCompat.Button.Borderless"
+                />
+        </FrameLayout>
     </RelativeLayout>
 </layout>
