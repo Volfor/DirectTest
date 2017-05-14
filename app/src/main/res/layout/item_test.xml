@@ -13,7 +13,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#22000000"
+        android:background="#00ffffff"
         android:padding="16dp">
 
         <ImageView
@@ -36,6 +36,7 @@
                 android:layout_height="wrap_content"
                 android:text="@{item.name}"
                 android:textSize="@dimen/material_list_normal_primary_text_size"
+                android:textColor="@color/textColorPrimary"
                 tools:text="Kotlin test" />
 
             <TextView
@@ -44,14 +45,16 @@
                 android:layout_height="wrap_content"
                 android:text='@{item.questions.size() + " questions"}'
                 android:textSize="@dimen/material_list_normal_secondary_text_size"
+                android:textColor="@color/textColorPrimaryLight"
                 tools:text="16 questions" />
 
             <TextView
                 android:id="@+id/test_est_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text='@{"Est. time:" + item.time}'
+                android:text='@{"Est. time: " + item.readableTime}'
                 android:textSize="@dimen/material_list_normal_secondary_text_size"
+                android:textColor="@color/textColorSecondary"
                 tools:text="Est. time: 35min" />
         </LinearLayout>
     </RelativeLayout>

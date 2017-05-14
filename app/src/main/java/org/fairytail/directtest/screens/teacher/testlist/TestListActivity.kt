@@ -10,6 +10,7 @@ import com.github.nitrico.lastadapter.Type
 import kotlinx.android.synthetic.main.activity_test_list.*
 import org.fairytail.directtest.BR
 import org.fairytail.directtest.R
+import org.fairytail.directtest.RecyclerDivider
 import org.fairytail.directtest.base.BaseBoundActivity
 import org.fairytail.directtest.databinding.ActivityTestListBinding
 import org.fairytail.directtest.databinding.ItemTestBinding
@@ -40,11 +41,21 @@ class TestListActivity : BaseBoundActivity<ActivityTestListBinding>(R.layout.act
                 }
 
         LastAdapter(testList, BR.item)
-                .type { _, _ ->
+                .type { _, position ->
                     Type<ItemTestBinding>(R.layout.item_test)
                             .onClick { TeacherTestActivity.start(this, it.binding.item) }
+                            // TODO: for showcase only! Remove after showcasing!
+                            .onBind {
+                                when (position) {
+                                    0 -> { it.binding.testIcon.setImageResource(R.drawable.oop) }
+                                    1 -> { it.binding.testIcon.setImageResource(R.drawable.programming) }
+                                    2 -> { it.binding.testIcon.setImageResource(R.drawable.cplusplus) }
+                                }
+                            }
                 }
                 .into(list_test)
+
+        list_test.addItemDecoration(RecyclerDivider.horizontal)
     }
 
     companion object {

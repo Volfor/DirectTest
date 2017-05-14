@@ -6,6 +6,7 @@ import io.realm.annotations.PrimaryKey
 import org.parceler.Parcel
 import org.parceler.ParcelConstructor
 import java.util.*
+import java.util.concurrent.TimeUnit
 
 /**
  * Created by Alex on 5/13/2017.
@@ -19,6 +20,9 @@ data class Test @ParcelConstructor constructor(
         val questions: List<Question>,
         val time: Long
 ) {
+    val readableTime: String
+        get() = "${TimeUnit.MILLISECONDS.toMinutes(time)}min"
+
     constructor(test: RealmTest) : this(
             UUID.fromString(test.id),
             test.name!!,
