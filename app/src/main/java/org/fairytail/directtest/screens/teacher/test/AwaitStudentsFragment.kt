@@ -34,7 +34,10 @@ class AwaitStudentsFragment : BaseBoundTeacherTestFragment<FragmentAwaitStudents
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        network.startNetworkService { salutDevice -> devices.add(salutDevice)}
+        network.startNetworkService { salutDevice ->
+            waitingLayout.visibility = View.GONE
+            devices.add(salutDevice)
+        }
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
