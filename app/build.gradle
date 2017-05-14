@@ -56,6 +56,7 @@ dependencies {
     compile "com.android.support:design:$support_version"
     compile "com.android.support:recyclerview-v7:$support_version"
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.google.android:flexbox:0.3.0-alpha3'
 
     // Language features
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
