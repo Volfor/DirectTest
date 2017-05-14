@@ -20,6 +20,8 @@ object FakeDataProvider {
                 realm.deleteAll()
 
                 createOOPTest(realm)
+                createProgrammingTest(realm)
+                createCppTest(realm)
 
 //                (0..25).forEach {
 //                    val test = realm.createObject(RealmTest::class.java, Db.randomUuidString())
@@ -265,7 +267,152 @@ fun createOOPTest(realm: Realm) {
     answers13 += createCorrectAnswer(realm, "Избыточность")
     question13.answers!!.addAll(answers13)
     test.questions!!.add(question13)
+}
 
+fun createProgrammingTest(realm: Realm) {
+    val test = realm.createObject(RealmTest::class.java, Db.randomUuidString())
+    test.name = "Программирование"
+    test.time = TimeUnit.MINUTES.toMillis(12)
+
+    val question1 = realm.createObject(RealmQuestion::class.java)
+    question1.typeEnum = QuestionType.MULTIPLE_ANSWERS
+    question1.text = "Какие виды типизаций переменных существуют?"
+    val answers1 = mutableListOf<RealmAnswer>()
+    answers1 += createCorrectAnswer(realm, "утиная типизация")
+    answers1 += createCorrectAnswer(realm, "динамическая типизация")
+    answers1 += createCorrectAnswer(realm, "статическая типизация")
+    answers1 += createCorrectAnswer(realm, "строгая типизация")
+    answers1 += createIncorrectAnswer(realm, "средняя типизация")
+    answers1 += createCorrectAnswer(realm, "нестрогая типизация")
+    answers1 += createIncorrectAnswer(realm, "гусиная типизация")
+    question1.answers!!.addAll(answers1)
+    test.questions!!.add(question1)
+
+    val question2 = realm.createObject(RealmQuestion::class.java)
+    question2.typeEnum = QuestionType.SINGLE_ANSWER
+    question2.text = "Множество значений, которые может принимать переменная, а также множество операций, допустимых над данной переменной, определяется ..."
+    val answers2 = mutableListOf<RealmAnswer>()
+    answers2 += createCorrectAnswer(realm, "типом данных переменной")
+    answers2 += createIncorrectAnswer(realm, "структурой данных")
+    answers2 += createIncorrectAnswer(realm, "областью видимости переменной")
+    answers2 += createIncorrectAnswer(realm, "ничем из перечисленного")
+    question2.answers!!.addAll(answers2)
+    test.questions!!.add(question2)
+
+    val question3 = realm.createObject(RealmQuestion::class.java)
+    question3.typeEnum = QuestionType.MULTIPLE_ANSWERS
+    question3.text = "Скорость которых с нижеперечисленных алгоритмов в лучшем случае составляет O(n) ?"
+    val answers3 = mutableListOf<RealmAnswer>()
+    answers3 += createIncorrectAnswer(realm, "Сортировка выбором")
+    answers3 += createCorrectAnswer(realm, "Сортировка пузырьком")
+    answers3 += createCorrectAnswer(realm, "Сортировка вставками")
+    answers3 += createIncorrectAnswer(realm, "Быстрая сортировка")
+    question3.answers!!.addAll(answers3)
+    test.questions!!.add(question3)
+
+    val question4 = realm.createObject(RealmQuestion::class.java)
+    question4.typeEnum = QuestionType.SINGLE_ANSWER
+    question4.text = "Чем отличаются унарные операторы от бинарных?"
+    val answers4 = mutableListOf<RealmAnswer>()
+    answers4 += createIncorrectAnswer(realm, "Бинарные операторы используются для чисел в бинарной системе счисления")
+    answers4 += createCorrectAnswer(realm, "Бинарные операторы работают с двумя операндами")
+    answers4 += createIncorrectAnswer(realm, "Принципиальной разницы нет")
+    answers4 += createIncorrectAnswer(realm, "Понятия \"унарный оператор\" не существует")
+    question4.answers!!.addAll(answers4)
+    test.questions!!.add(question4)
+
+    val question5 = realm.createObject(RealmQuestion::class.java)
+    question5.typeEnum = QuestionType.SINGLE_ANSWER
+    question5.text = "Что такое компиляция"
+    val answers5 = mutableListOf<RealmAnswer>()
+    answers5 += createIncorrectAnswer(realm, "Проверка компилятором правильности написания программного кода")
+    answers5 += createIncorrectAnswer(realm, "Трансляция программы на машинный язык более высокого уровня и проверка правильности написания кода")
+    answers5 += createCorrectAnswer(realm, "Трансляция программы, составленной на языке высокого уровня, в эквивалентную программу на низкоуровневом языке")
+    answers5 += createIncorrectAnswer(realm, "Ничего из перечисленного выше")
+    question5.answers!!.addAll(answers5)
+    test.questions!!.add(question5)
+
+    val question6 = realm.createObject(RealmQuestion::class.java)
+    question6.typeEnum = QuestionType.SINGLE_ANSWER
+    question6.text = "Какой метод программирования подразумевает создание конечной программы путем объединения ранее созданных мелких программных модулей (вспомогательных) в более крупные?"
+    val answers6 = mutableListOf<RealmAnswer>()
+    answers6 += createIncorrectAnswer(realm, "Сверху-вниз")
+    answers6 += createIncorrectAnswer(realm, "Слева-направо")
+    answers6 += createCorrectAnswer(realm, "Снизу-вверх")
+    answers6 += createIncorrectAnswer(realm, "Справа-налево")
+    question6.answers!!.addAll(answers6)
+    test.questions!!.add(question6)
+
+    val question7 = realm.createObject(RealmQuestion::class.java)
+    question7.typeEnum = QuestionType.SINGLE_ANSWER
+    question7.text = "Дано булевое выражение: not A or not B. Какому из следующих выражений оно эквивалентно:"
+    val answers7 = mutableListOf<RealmAnswer>()
+    answers7 += createIncorrectAnswer(realm, "not ( A or B )")
+    answers7 += createCorrectAnswer(realm, "not ( A and B )")
+    answers7 += createIncorrectAnswer(realm, "A and B")
+    answers7 += createIncorrectAnswer(realm, "not ( not A and not B )")
+    question7.answers!!.addAll(answers7)
+    test.questions!!.add(question7)
+
+    val question8 = realm.createObject(RealmQuestion::class.java)
+    question8.typeEnum = QuestionType.SINGLE_ANSWER
+    question8.text = "Что такое инициализация переменной:"
+    val answers8 = mutableListOf<RealmAnswer>()
+    answers8 += createIncorrectAnswer(realm, "внесение первоначального значения с помощью оператора ввода")
+    answers8 += createCorrectAnswer(realm, "внесение первоначального значения с помощью оператора присвоения")
+    answers8 += createIncorrectAnswer(realm, "объявление в разделе описания переменных")
+    question8.answers!!.addAll(answers8)
+    test.questions!!.add(question8)
+}
+
+fun createCppTest(realm: Realm) {
+    val test = realm.createObject(RealmTest::class.java, Db.randomUuidString())
+    test.name = "C++ - Основы"
+    test.time = TimeUnit.MINUTES.toMillis(18)
+
+    val question1 = realm.createObject(RealmQuestion::class.java)
+    question1.typeEnum = QuestionType.MULTIPLE_ANSWERS
+    question1.text = "Какие из перечисленных фрагментов кода не содержат ошибки?"
+    val answers1 = mutableListOf<RealmAnswer>()
+    answers1 += createCorrectAnswer(realm, "// 2 \nconst int i = 0; \nint j = i;")
+    answers1 += createIncorrectAnswer(realm, "// 1 \nconst int i = 0; \nint &j = i;")
+    answers1 += createCorrectAnswer(realm, "// 3 \nint i = 0; \nint j = i;")
+    question1.answers!!.addAll(answers1)
+    test.questions!!.add(question1)
+
+    val question2 = realm.createObject(RealmQuestion::class.java)
+    question2.typeEnum = QuestionType.MULTIPLE_ANSWERS
+    question2.text = "Определите верную запись значения 23,45 умноженное на 10 в 10-ой степени."
+    val answers2 = mutableListOf<RealmAnswer>()
+    answers2 += createIncorrectAnswer(realm, "2.345PE11")
+    answers2 += createIncorrectAnswer(realm, "23.45P10")
+    answers2 += createIncorrectAnswer(realm, "23.45PE10")
+    answers2 += createIncorrectAnswer(realm, "2.345P11")
+    answers2 += createCorrectAnswer(realm, "2.345E11")
+    question2.answers!!.addAll(answers2)
+    test.questions!!.add(question2)
+
+    val question3 = realm.createObject(RealmQuestion::class.java)
+    question3.typeEnum = QuestionType.SINGLE_ANSWER
+    question3.text = "Пусть а = -5. Сколько раз выполнится тело следующего цикла?\nwhile (a < 0) a++;"
+    val answers3 = mutableListOf<RealmAnswer>()
+    answers3 += createIncorrectAnswer(realm, "0 раз")
+    answers3 += createIncorrectAnswer(realm, "6 раз")
+    answers3 += createIncorrectAnswer(realm, "4 раза")
+    answers3 += createCorrectAnswer(realm, "5 раз")
+    question3.answers!!.addAll(answers3)
+    test.questions!!.add(question3)
+
+    val question4 = realm.createObject(RealmQuestion::class.java)
+    question4.typeEnum = QuestionType.SINGLE_ANSWER
+    question4.text = "Сколько конструкторов и деструкторов может быть у одного класса (выберите наиболее точный вариант)?"
+    val answers4 = mutableListOf<RealmAnswer>()
+    answers4 += createIncorrectAnswer(realm, "Один конструктор, один деструктор")
+    answers4 += createCorrectAnswer(realm, "Несколько конструкторов, один деструктор")
+    answers4 += createIncorrectAnswer(realm, "Несколько конструкторов, несколько деструкторов")
+    answers4 += createIncorrectAnswer(realm, "Один конструктор, несколько деструкторов")
+    question4.answers!!.addAll(answers4)
+    test.questions!!.add(question4)
 }
 
 fun createCorrectAnswer(realm: Realm, text: String): RealmAnswer {
