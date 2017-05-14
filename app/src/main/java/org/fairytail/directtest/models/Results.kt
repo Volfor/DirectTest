@@ -27,3 +27,8 @@ data class TestResult @ParcelConstructor constructor(
         }
     }
 }
+
+@Parcel(Parcel.Serialization.BEAN)
+data class TestResults @ParcelConstructor constructor(
+        val items: List<TestResult>
+)

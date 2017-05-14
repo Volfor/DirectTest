@@ -2,6 +2,7 @@ package org.fairytail.directtest.screens.teacher.test
 
 import android.content.Context
 import android.content.Intent
+import android.databinding.ObservableArrayList
 import android.os.Bundle
 import com.google.gson.Gson
 import org.fairytail.directtest.Prefs
@@ -9,9 +10,8 @@ import org.fairytail.directtest.R
 import org.fairytail.directtest.WifiToggleHelper
 import org.fairytail.directtest.base.BaseBoundSalutActivity
 import org.fairytail.directtest.databinding.ActivityTeacherTestBinding
-import org.fairytail.directtest.models.Message
-import org.fairytail.directtest.models.MessageType
-import org.fairytail.directtest.models.Test
+import org.fairytail.directtest.models.*
+import org.fairytail.directtest.screens.teacher.TestResultsListActivity
 import org.jetbrains.anko.toast
 import org.parceler.Parcels
 
@@ -20,12 +20,14 @@ import org.parceler.Parcels
  * GitHub: https://github.com/s0nerik
  * LinkedIn: https://linkedin.com/in/sonerik
  */
-enum class State { INITIAL, AWAIT_STUDENTS, AWAIT_RESULTS, SHOW_RESULTS }
+enum class State { INITIAL, AWAIT_STUDENTS, AWAIT_RESULTS }
 
 class TeacherTestActivity : BaseBoundSalutActivity<ActivityTeacherTestBinding>(R.layout.activity_teacher_test, true) {
     private var state: State = State.INITIAL
 
     lateinit var test: Test
+
+    val testResults = ObservableArrayList<TestResult>()
 
     override val deviceName = Prefs.teacherInfo.name
 
@@ -46,7 +48,6 @@ class TeacherTestActivity : BaseBoundSalutActivity<ActivityTeacherTestBinding>(R
                         network.sendToAllDevices(msg, { runOnUiThread { toast("Error sending message!") } })
                         AwaitResultsFragment()
                     }
-                    State.SHOW_RESULTS -> TODO()
                     else -> throw IllegalStateException()
                 })
                 .commit()
@@ -54,7 +55,14 @@ class TeacherTestActivity : BaseBoundSalutActivity<ActivityTeacherTestBinding>(R
     }
 
     override fun onMessageReceived(msg: Message) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        if (msg.type == MessageType.TEST_RESULT) {
+            testResults.add(msg.getDataObject(TestResult::class))
+        }
+
+        if (testResults.size >= network.registeredClients.size) {
+            finish()
+            TestResultsListActivity.start(this, TestResults(testResults))
+        }
     }
 
     companion object {
