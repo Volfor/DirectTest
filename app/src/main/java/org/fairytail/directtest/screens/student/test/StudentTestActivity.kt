@@ -11,7 +11,6 @@ import org.fairytail.directtest.databinding.ActivityStudentTestBinding
 import org.fairytail.directtest.models.Message
 import org.fairytail.directtest.models.MessageType
 import org.fairytail.directtest.models.Test
-import org.fairytail.directtest.models.TestResult
 
 /**
  * Created by Valentine on 5/13/2017.
@@ -40,7 +39,7 @@ class StudentTestActivity : BaseBoundSalutActivity<ActivityStudentTestBinding>(R
                     State.SELECT_TEACHER -> SelectTeacherFragment()
                     State.AWAIT_START -> AwaitStartFragment()
                     State.QUIZ -> PassingFragment()
-                    State.RESULT -> TODO()
+                    State.RESULT -> ResultsFragment()
                     else -> throw IllegalStateException()
                 })
                 .commit()
@@ -53,9 +52,7 @@ class StudentTestActivity : BaseBoundSalutActivity<ActivityStudentTestBinding>(R
                 test = msg.getDataObject(Test::class)
                 moveToState(State.QUIZ)
             }
-            MessageType.TEST_RESULT -> {
-                val testResult = msg.getDataObject(TestResult::class)
-            }
+            MessageType.TEST_RESULT -> throw IllegalStateException()
             null -> throw IllegalStateException()
         }
     }

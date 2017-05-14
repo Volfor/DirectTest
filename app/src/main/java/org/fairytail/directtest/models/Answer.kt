@@ -13,9 +13,10 @@ import org.parceler.ParcelConstructor
 @Parcel(Parcel.Serialization.BEAN)
 data class Answer @ParcelConstructor constructor(
         var text: String,
+        var correct: Boolean = false,
         var checked: Boolean = false
 ) {
-    constructor(answer: RealmAnswer) : this(answer.text!!, answer.checked!!)
+    constructor(answer: RealmAnswer) : this(answer.text!!, answer.isCorrect!!, answer.checked!!)
     constructor(number: Number) : this(number.toString())
 
     val observableState = ObservableBoolean(checked)
@@ -23,5 +24,6 @@ data class Answer @ParcelConstructor constructor(
 
 open class RealmAnswer(
         open var text: String? = null,
+        open var isCorrect: Boolean? = null,
         open var checked: Boolean? = null
 ) : RealmObject()

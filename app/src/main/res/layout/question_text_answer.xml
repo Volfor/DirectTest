@@ -26,7 +26,7 @@
             android:layout_marginTop="16dp"
             android:hint="@string/enter_your_answer"
             android:inputType="text"
-            android:onTextChanged='@{(s, p1, p2, p3) -> item.answers.get(0).setText(s.toString())}'
+            android:onTextChanged='@{(s, p1, p2, p3) -> item.answers.get(1).setText(s.toString())}'
             />
     </RelativeLayout>
 </layout>

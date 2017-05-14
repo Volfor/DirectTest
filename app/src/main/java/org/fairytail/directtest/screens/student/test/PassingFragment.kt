@@ -46,6 +46,9 @@ class PassingFragment : BaseBoundStudentTestFragment<FragmentPassingBinding>(R.l
         LastAdapter(question.answers, BR.item)
                 .type { _, _ ->
                     Type<ItemSingleAnswerBinding>(R.layout.item_single_answer)
+                            .onBind {
+                                it.binding.item = null
+                            }
                             .onClick {
                                 it.binding.radioButton.setOnCheckedChangeListener { _, _ -> }
                                 question.answers.forEach { it.checked = false; it.observableState.set(false) }

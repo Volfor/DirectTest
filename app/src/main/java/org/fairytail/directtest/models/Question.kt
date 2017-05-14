@@ -36,19 +36,27 @@ data class Question @ParcelConstructor constructor(
         val type: QuestionType,
         val text: String,
         val image: QuestionImage?, // TODO: save pi
-        val answers: List<Answer>,
-        val correctAnswers: List<Answer>
+        val answers: List<Answer>
 ) {
     constructor(question: RealmQuestion) : this(
             QuestionType.valueOf(question.type!!),
             question.text!!,
             QuestionImage.from(question.image),
-            question.answers!!.map { Answer(it) },
-            question.correctAnswers!!.map { Answer(it) }
+            question.answers!!.map { Answer(it) }
     )
 
-    fun check(vararg answers: Answer): Boolean {
-        return correctAnswers.containsAll(answers.toList()) && correctAnswers.size == answers.size
+    val checkedAnswerTexts: List<String>
+        get() = answers.filter { it.checked }.map { it.text }
+
+    val correctAnswerTexts: List<String>
+        get() = answers.filter { it.correct }.map { it.text }
+
+    fun check(): Boolean {
+        if (type == QuestionType.SINGLE_ANSWER || type == QuestionType.MULTIPLE_ANSWERS) {
+            return correctAnswerTexts.containsAll(checkedAnswerTexts) && checkedAnswerTexts.containsAll(correctAnswerTexts)
+        } else {
+            return answers[0].text == answers[1].text
+        }
     }
 }
 
@@ -56,8 +64,7 @@ open class RealmQuestion(
         open var type: String? = null,
         open var text: String? = null,
         open var image: RealmQuestionImage? = null,
-        open var answers: RealmList<RealmAnswer>? = null,
-        open var correctAnswers: RealmList<RealmAnswer>? = null
+        open var answers: RealmList<RealmAnswer>? = null
 ) : RealmObject() {
     var typeEnum: QuestionType
         get() = QuestionType.valueOf(type!!)

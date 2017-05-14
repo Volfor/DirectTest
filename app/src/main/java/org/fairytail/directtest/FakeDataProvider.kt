@@ -18,6 +18,8 @@ object FakeDataProvider {
     fun provideFakeTests() {
         Realm.getDefaultInstance().use { r ->
             r.executeTransaction { realm ->
+                realm.deleteAll()
+
                 (0..25).forEach {
                     val test = realm.createObject(RealmTest::class.java, Db.randomUuidString())
                     test.name = "Test "+it
@@ -35,74 +37,74 @@ object FakeDataProvider {
     }
 
     private fun createAnswers(realm: Realm, question: RealmQuestion) {
-        val correctAnswers: MutableList<RealmAnswer> = when (question.typeEnum) {
-            QuestionType.SINGLE_ANSWER -> {
-                val answer = realm.createObject(RealmAnswer::class.java)
-                answer.text = "Correct"
-                answer.checked = false
-                mutableListOf(answer)
-            }
-            QuestionType.MULTIPLE_ANSWERS -> {
-                val answers = mutableListOf<RealmAnswer>()
-                (2..Random().nextInt(4)).forEach {
-                    val answer = realm.createObject(RealmAnswer::class.java)
-                    answer.text = "Correct"
-                    answer.checked = false
-                    answers += answer
-                }
-                answers
-            }
-            QuestionType.INPUT_NUMBER -> {
-                val answer = realm.createObject(RealmAnswer::class.java)
-                answer.text = "42"
-                answer.checked = false
-                mutableListOf(answer)
-            }
-            QuestionType.INPUT_TEXT -> {
-                val answer = realm.createObject(RealmAnswer::class.java)
-                answer.text = "Correct"
-                answer.checked = false
-                mutableListOf(answer)
-            }
-        }
-        val incorrectAnswers: MutableList<RealmAnswer> = when(question.typeEnum) {
+        val answers: MutableList<RealmAnswer> = when (question.typeEnum) {
             QuestionType.SINGLE_ANSWER -> {
                 val answers = mutableListOf<RealmAnswer>()
-                (2..Random().nextInt(5)).forEach {
-                    val answer = realm.createObject(RealmAnswer::class.java)
-                    answer.text = "Incorrect"
-                    answer.checked = false
-                    answers += answer
+
+                val correctAnswer = realm.createObject(RealmAnswer::class.java)
+                correctAnswer.text = "Correct"
+                correctAnswer.checked = false
+                correctAnswer.isCorrect = true
+
+                answers += correctAnswer
+
+                (2..2 + Random().nextInt(5)).forEach {
+                    val incorrectAnswer = realm.createObject(RealmAnswer::class.java)
+                    incorrectAnswer.text = "Incorrect $it"
+                    incorrectAnswer.checked = false
+                    incorrectAnswer.isCorrect = false
+                    answers += incorrectAnswer
                 }
                 answers
             }
             QuestionType.MULTIPLE_ANSWERS -> {
                 val answers = mutableListOf<RealmAnswer>()
-                (2..Random().nextInt(4)).forEach {
+                (2..2 + Random().nextInt(4)).forEach {
+                    val correctAnswer = realm.createObject(RealmAnswer::class.java)
+                    correctAnswer.text = "Correct $it"
+                    correctAnswer.checked = false
+                    correctAnswer.isCorrect = true
+                    answers += correctAnswer
+                }
+
+                (2..2 + Random().nextInt(4)).forEach {
                     val answer = realm.createObject(RealmAnswer::class.java)
-                    answer.text = "Incorrect"
+                    answer.text = "Incorrect $it"
                     answer.checked = false
+                    answer.isCorrect = false
                     answers += answer
                 }
+
                 answers
             }
             QuestionType.INPUT_NUMBER -> {
-                val answer = realm.createObject(RealmAnswer::class.java)
-                answer.text = ""
-                answer.checked = false
-                mutableListOf(answer)
+                val correctAnswer = realm.createObject(RealmAnswer::class.java)
+                correctAnswer.text = "42"
+                correctAnswer.checked = false
+                correctAnswer.isCorrect = true
+
+                val userAnswer = realm.createObject(RealmAnswer::class.java)
+                userAnswer.text = ""
+                userAnswer.checked = false
+                userAnswer.isCorrect = false
+
+                mutableListOf(correctAnswer, userAnswer)
             }
             QuestionType.INPUT_TEXT -> {
-                val answer = realm.createObject(RealmAnswer::class.java)
-                answer.text = ""
-                answer.checked = false
-                mutableListOf(answer)
+                val correctAnswer = realm.createObject(RealmAnswer::class.java)
+                correctAnswer.text = "Correct"
+                correctAnswer.checked = false
+                correctAnswer.isCorrect = true
+
+                val userAnswer = realm.createObject(RealmAnswer::class.java)
+                userAnswer.text = ""
+                userAnswer.checked = false
+                userAnswer.isCorrect = false
+
+                mutableListOf(correctAnswer, userAnswer)
             }
         }
 
-        val allAnswers = correctAnswers + incorrectAnswers
-        Collections.shuffle(allAnswers)
-
-        question.answers!!.addAll(allAnswers)
+        question.answers!!.addAll(answers)
     }
 }

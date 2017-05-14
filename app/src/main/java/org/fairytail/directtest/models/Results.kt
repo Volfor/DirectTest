@@ -10,7 +10,7 @@ import org.parceler.ParcelConstructor
 data class QuestionResult @ParcelConstructor constructor(
         val question: Question,
         val answers: List<Answer>,
-        val correct: Boolean
+        var correct: Boolean
 )
 
 @Parcel(Parcel.Serialization.BEAN)
@@ -18,4 +18,12 @@ data class TestResult @ParcelConstructor constructor(
         val test: Test,
         val questionResults: List<QuestionResult>,
         val student: Student
-)
+) {
+    companion object {
+        fun from(student: Student, test: Test): TestResult {
+            val result = TestResult(test, test.questions.map { QuestionResult(it, it.answers, false) }, student)
+            result.questionResults.forEach { it.correct = it.question.check() }
+            return result
+        }
+    }
+}
