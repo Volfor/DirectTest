@@ -16,21 +16,24 @@
         android:padding="16dp">
 
         <TextView
+            style="@style/MaterialTypography.Regular.Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="36dp"
-            android:text="Who are you?"
-            android:textSize="26sp" />
+            android:text="Who are you?" />
 
         <Button
-            android:layout_width="match_parent"
+            android:layout_width="172dp"
             android:layout_height="wrap_content"
+            android:drawableStart="@drawable/school"
             android:onClick="@{(v) -> vm.onTeacherClick(v)}"
             android:text="Teacher" />
 
         <Button
-            android:layout_width="match_parent"
+            android:layout_width="172dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:drawableStart="@drawable/face"
             android:onClick="@{(v) -> vm.onStudentClick(v)}"
             android:text="Student" />
 
